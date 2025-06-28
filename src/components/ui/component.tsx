@@ -1,5 +1,6 @@
 "use client";
 
+import ServicesSection from '../ServicesSection';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -494,119 +495,6 @@ function HeroSection() {
     </section>
   );
 }
-
-function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) => void }) {
-  const services = [
-    {
-      icon: <Globe className="w-8 h-8" />,
-      title: "Smart Websites",
-      description: "Beautiful, modern websites built with intelligence and style.",
-            features: ["Futuristic landing pages", "3D interactive designs", "Portfolios, SaaS, and eCommerce"],
-      emoji: "🔮",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: <Brain className="w-8 h-8" />,
-      title: "AI Agents & Chatbots",
-      description: "Custom GPT-powered bots that talk, think, and take action.",
-            features: ["Booking bots, support bots, and sales agents", "Trained on your business data", "Multi-platform deployment"],
-      emoji: "🧠",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      icon: <Cog className="w-8 h-8" />,
-      title: "Automation Systems",
-      description: "End-to-end workflows that connect your tools and run your business on autopilot.",
-            features: ["CRM + Notion + Google Sheets automation", "Auto-form processing, reminders", "Lead tracking & onboarding logic"],
-      emoji: "⚙️",
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      icon: <Puzzle className="w-8 h-8" />,
-      title: "Custom AI Tools",
-            description: "Custom AI-powered tools built to solve real-world problems with intelligent design.",
-            features: ["Summarizers, generators, extractors", "Trained for specific workflows", "Hosted tools or embeddable widgets"],
-      emoji: "🧩",
-      color: "from-orange-500 to-red-500"
-    }
-  ];
-
-  return (
-    <section id="services" className="relative w-full min-h-screen py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Our Services
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive AI solutions designed to transform your business operations and accelerate growth.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Card className="flex flex-col grow bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10">
-                <CardHeader>
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center text-white shadow-lg`}>
-                      {service.icon}
-                    </div>
-                    <div>
-                      <div className="text-2xl mb-2">{service.emoji}</div>
-                      <h3 className="text-2xl font-bold text-foreground">{service.title}</h3>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground text-lg">{service.description}</p>
-                </CardHeader>
-                <CardContent className="flex flex-col flex-grow space-y-6">
-                  <ul className="space-y-3">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start space-x-3">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto">
-                    <Button 
-                      className="w-full group" 
-                      variant="outline"
-                      onClick={() => {
-                        if (service.title === "Smart Websites" && setCurrentPage) {
-                          setCurrentPage('smart-websites');
-                        } else if (service.title === "AI Agents & Chatbots" && setCurrentPage) {
-                          setCurrentPage('ai-agents');
-                        }
-                      }}
-                    >
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
 
 function WhatYouGetSection() {
   const deliverables = [
