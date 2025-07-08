@@ -6,15 +6,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { supabase, type ContactInsert } from "@/lib/supabase";
+import { supabase, type ContactInsert, type SmartWebsitesContactInsert, type AIAgentsContactInsert } from "@/lib/supabase";
 import { Send, Loader2 } from 'lucide-react';
 
 interface ContactFormProps {
   variant?: 'default' | 'smart-websites' | 'ai-agents';
 }
 
+type FormDataType = ContactInsert | SmartWebsitesContactInsert | AIAgentsContactInsert;
+
 export default function ContactForm({ variant = 'default' }: ContactFormProps) {
-  const [formData, setFormData] = useState<ContactInsert>({
+  const [formData, setFormData] = useState<FormDataType>({
     name: '',
     email: '',
     service: '',
@@ -23,7 +25,7 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleInputChange = (field: keyof ContactInsert, value: string) => {
+  const handleInputChange = (field: keyof FormDataType, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -42,11 +44,24 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
     setIsSubmitting(true);
 
     try {
+      let tableName: string;
+      
+      switch (variant) {
+        case 'smart-websites':
+          tableName = 'smart_websites_contacts';
+          break;
+        case 'ai-agents':
+          tableName = 'ai_agents_contacts';
+          break;
+        default:
+          tableName = 'contacts';
+      }
+
       const { data, error } = await supabase
-        .from('contacts')
+        .from(tableName)
         .insert([formData])
         .select();
-
+        
       if (error) {
         throw error;
       }

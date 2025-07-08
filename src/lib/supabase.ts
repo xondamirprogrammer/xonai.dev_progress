@@ -26,3 +26,39 @@ export interface ContactInsert {
   service: string;
   message: string;
 }
+
+// Smart Websites Contact types
+export interface SmartWebsitesContact {
+  id: string;
+  name: string;
+  email: string;
+  service: string;
+  message: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SmartWebsitesContactInsert {
+  name: string;
+  email: string;
+  service: string;
+  message: string;
+}
+
+// AI Agents Contact types
+export interface AIAgentsContact {
+  id: string;
+  name: string;
+  email: string;
+  service: string;
+  message: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AIAgentsContactInsert {
+  name: string;
+  email: string;
+  service: string;
+  message: string;
+}
