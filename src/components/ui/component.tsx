@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronRight, Globe, Brain, Zap, Bot, Cog, Puzzle, Rocket, MessageSquare, Settings, Sparkles, ArrowRight, Menu, X, Eye, Layers, Code, TrendingUp, ChevronDown, Plus, Minus, Phone, Mail, Send } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import ContactForm from "../ContactForm";
 
 
 interface AnimatedTextCycleProps {
@@ -1004,33 +1005,6 @@ function FAQSection() {
 }
 
 function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    service: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      service: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
-
   return (
     <section id="contact" className="relative w-full py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -1083,88 +1057,7 @@ function ContactSection() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 p-8">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                          Name
-                        </label>
-                        <Input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
-                          placeholder="Your name"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                          Email
-                        </label>
-                        <Input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
-                          placeholder="your@email.com"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="service" className="block text-sm font-medium text-foreground mb-2">
-                          What are you looking for?
-                        </label>
-                        <Select onValueChange={handleSelectChange} value={formData.service}>
-                          <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
-                            <SelectValue placeholder="Select a service" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="ai-automation">AI Automation</SelectItem>
-                            <SelectItem value="website">Website</SelectItem>
-                            <SelectItem value="both">Both</SelectItem>
-                            <SelectItem value="something-else">Something Else</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                          Message
-                        </label>
-                        <Textarea
-                          id="message"
-                          name="message"
-                          value={formData.message}
-                          onChange={handleInputChange}
-                          required
-                          rows={5}
-                          className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
-                          placeholder="Tell us about your project..."
-                        />
-                      </div>
-                    </div>
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
-                      size="lg"
-                    >
-                      Send Message
-                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </form>
-                </div>
-              </Card>
+              <ContactForm />
             </motion.div>
 
             <motion.div
@@ -1584,41 +1477,6 @@ function AIAgentsPerfectFor() {
 
 // AI Agents Contact Section
 function AIAgentsContact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    need: '',
-    message: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      need: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('AI Agents Contact Form submitted:', formData);
-    // Add actual form submission logic here (e.g., API call)
-    alert('Thank you for your inquiry! We will get back to you within 12 hours.');
-    setFormData({
-      name: '',
-      email: '',
-      need: '',
-      message: ''
-    });
-  };
-
   return (
     <section id="ai-agents-contact" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -1667,101 +1525,7 @@ function AIAgentsContact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10 p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                        Name
-                      </label>
-                      <Input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                        Email
-                      </label>
-                      <Input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
-                        placeholder="your@email.com"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="need" className="block text-sm font-medium text-foreground mb-2">
-                        What do you need?
-                      </label>
-                      <Select onValueChange={handleSelectChange} value={formData.need}>
-                        <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
-                          <SelectValue placeholder="Select what you need" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-background border-border">
-                          <SelectItem value="ai-agent-only">AI Agent only</SelectItem>
-                          <SelectItem value="website-only">Website only</SelectItem>
-                          <SelectItem value="both">Both</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                        Message
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        required
-                        rows={5}
-                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
-                        placeholder="Tell us about your goals..."
-                      />
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
-                    size="lg"
-                  >
-                    Send Request
-                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </form>
-                <div className="text-center mt-6">
-                  <p className="text-muted-foreground text-sm mb-3">
-                    For fastest response, reach out via Telegram:
-                  </p>
-                  <a 
-                    href="https://t.me/M_X_Mirsaidov" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="inline-flex items-center space-x-2 text-primary font-medium hover:underline"
-                  >
-                    <Send className="w-4 h-4" />
-                    <span>@M_X_Mirsaidov</span>
-                  </a>
-                </div>
-              </div>
-            </Card>
+            <ContactForm variant="ai-agents" />
           </motion.div>
         </div>
       </div>
@@ -2169,41 +1933,6 @@ function SmartWebsitesCTA() {
 }
 
 function SmartWebsitesContact() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    emailAddress: '',
-    projectType: '',
-    projectDescription: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      projectType: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Smart Websites Contact Form submitted:', formData);
-    // Add actual form submission logic here (e.g., API call)
-    alert('Thank you for your inquiry! We will get back to you within 24 hours.');
-    setFormData({
-      fullName: '',
-      emailAddress: '',
-      projectType: '',
-      projectDescription: ''
-    });
-  };
-
   return (
     <section id="smart-websites-contact" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -2252,100 +1981,7 @@ function SmartWebsitesContact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10 p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-2">
-                        Full Name
-                      </label>
-                      <Input
-                        type="text"
-                        id="fullName"
-                        name="full Name"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
-                        placeholder="Your full name"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="emailAddress" className="block text-sm font-medium text-foreground mb-2">
-                        Email Address
-                      </label>
-                      <Input
-                        type="email"
-                        id="emailAddress"
-                        name="emailAddress"
-                        value={formData.emailAddress}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
-                        placeholder="your@email.com"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="projectType" className="block text-sm font-medium text-foreground mb-2">
-                        Project Type
-                      </label>
-                      <Select onValueChange={handleSelectChange} value={formData.projectType}>
-                        <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
-                          <SelectValue placeholder="Select project type" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-background border-border">
-                          <SelectItem value="website-only">Website only</SelectItem>
-                          <SelectItem value="website-ai-agent">Website + AI Agent</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="projectDescription" className="block text-sm font-medium text-foreground mb-2">
-                        Short Project Description
-                      </label>
-                      <Textarea
-                        id="projectDescription"
-                        name="projectDescription"
-                        value={formData.projectDescription}
-                        onChange={handleInputChange}
-                        required
-                        rows={5}
-                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
-                        placeholder="Describe your project briefly..."
-                      />
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
-                    size="lg"
-                  >
-                    Send Message
-                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </form>
-                <div className="text-center mt-6">
-                  <p className="text-muted-foreground text-sm">
-                    For fastest response, reach out via Telegram:{" "}
-                    <a 
-                      href="https://t.me/M_X_Mirsaidov" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-primary font-medium hover:underline"
-                    >
-                      @M_X_Mirsaidov
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </Card>
+            <ContactForm variant="smart-websites" />
           </motion.div>
         </div>
       </div>
