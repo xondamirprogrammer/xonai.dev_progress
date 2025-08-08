@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronRight, Globe, Brain, Zap, Bot, Cog, Puzzle, Rocket, MessageSquare, Settings, Sparkles, ArrowRight, Menu, X, Eye, Layers, Code, TrendingUp, ChevronDown, Plus, Minus, Phone, Mail, Send } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import ContactForm from "../ContactForm";
 
 
 interface AnimatedTextCycleProps {
@@ -35,7 +33,7 @@ function AnimatedTextCycle({
         setWidth(`${newWidth}px`);
       }
     }
-  }, [currentIndex]);
+  }, [currentIndex, words]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -46,7 +44,7 @@ function AnimatedTextCycle({
   }, [interval, words.length]);
 
   const containerVariants = {
-    hidden: { 
+    hidden: {
       y: -20,
       opacity: 0,
       filter: "blur(8px)"
@@ -60,12 +58,12 @@ function AnimatedTextCycle({
         ease: "easeOut"
       }
     },
-    exit: { 
+    exit: {
       y: 20,
       opacity: 0,
       filter: "blur(8px)",
-      transition: { 
-        duration: 0.3, 
+      transition: {
+        duration: 0.3,
         ease: "easeIn"
       }
     },
@@ -73,8 +71,8 @@ function AnimatedTextCycle({
 
   return (
     <>
-      <div 
-        ref={measureRef} 
+      <div
+        ref={measureRef}
         aria-hidden="true"
         className="absolute opacity-0 pointer-events-none"
         style={{ visibility: "hidden" }}
@@ -86,11 +84,11 @@ function AnimatedTextCycle({
         ))}
       </div>
 
-      <motion.span 
+      <motion.span
         className="relative inline-block"
-        animate={{ 
+        animate={{
           width,
-          transition: { 
+          transition: {
             type: "spring",
             stiffness: 150,
             damping: 15,
@@ -129,8 +127,8 @@ function GetStartedButton({ onClick }: { onClick?: () => void }) {
   };
 
   return (
-    <Button 
-      className="group relative overflow-hidden" 
+    <Button
+      className="group relative overflow-hidden"
       size="lg"
       onClick={handleGetStartedClick}
     >
@@ -213,7 +211,7 @@ function ThreeDBackground() {
           const dx = particle.x - other.x;
           const dy = particle.y - other.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (distance < 100) {
             ctx.globalAlpha = 0.1 * (1 - distance / 100);
             ctx.strokeStyle = particle.color;
@@ -254,29 +252,26 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
     e.preventDefault();
     if (page && setCurrentPage) {
       setCurrentPage(page);
-      // Give a small delay to allow page transition before scrolling
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100); // Adjust delay as needed
+      }, 100);
     } else {
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    setIsOpen(false); // Close mobile menu after clicking
+    setIsOpen(false);
   };
 
-        const handleLogoClick = () => {
+  const handleLogoClick = () => {
     if (setCurrentPage) {
       if (currentPage === 'home') {
-        // If already on home page, scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // If on different page, switch to home and scroll to top
         setCurrentPage('home');
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -295,24 +290,23 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
         if (contactElement) {
           contactElement.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100); // Small delay to allow page transition
+      }, 100);
     } else {
       const contactElement = document.getElementById('contact');
       if (contactElement) {
         contactElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    setIsOpen(false); // Close mobile menu after clicking
+    setIsOpen(false);
   };
 
-    // Determine navigation items based on current page
   const isSmartWebsitesPage = currentPage === 'smart-websites';
   const isAIAgentsPage = currentPage === 'ai-agents';
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                        <div 
+        <div
           className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity duration-300"
           onClick={handleLogoClick}
         >
@@ -322,7 +316,7 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
           <span className="text-xl font-bold text-foreground">xonai.dev</span>
         </div>
 
-                <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-4 lg:space-x-6 text-sm lg:text-base">
           {isSmartWebsitesPage ? (
             <>
               <a href="#why-smart-websites" onClick={(e) => handleNavLinkClick(e, 'why-smart-websites')} className="text-muted-foreground hover:text-foreground transition-colors">Why Us</a>
@@ -347,10 +341,10 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
           )}
         </div>
 
-                                <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-4">
           {isSmartWebsitesPage ? (
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
               onClick={() => {
                 const contactElement = document.getElementById('smart-websites-contact');
@@ -363,8 +357,8 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           ) : isAIAgentsPage ? (
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
               onClick={() => {
                 const contactElement = document.getElementById('ai-agents-contact');
@@ -392,7 +386,7 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
       {isOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border">
           <div className="container mx-auto px-4 py-4 space-y-4">
-                        {isSmartWebsitesPage ? (
+            {isSmartWebsitesPage ? (
               <>
                 <a href="#why-smart-websites" onClick={(e) => handleNavLinkClick(e, 'why-smart-websites')} className="block text-muted-foreground hover:text-foreground transition-colors">Why Us</a>
                 <a href="#whats-included" onClick={(e) => handleNavLinkClick(e, 'whats-included')} className="block text-muted-foreground hover:text-foreground transition-colors">Included</a>
@@ -414,10 +408,10 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
                 <a href="#contact" onClick={(e) => handleNavLinkClick(e, 'contact')} className="block text-muted-foreground hover:text-foreground transition-colors">Contact</a>
               </>
             )}
-                                                <div className="pt-4 space-y-2">
+            <div className="pt-4 space-y-2">
               {isSmartWebsitesPage ? (
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="w-full group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
                   onClick={() => {
                     const contactElement = document.getElementById('smart-websites-contact');
@@ -431,8 +425,8 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               ) : isAIAgentsPage ? (
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="w-full group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
                   onClick={() => {
                     const contactElement = document.getElementById('ai-agents-contact');
@@ -458,9 +452,9 @@ function Navigation({ setCurrentPage, currentPage }: { setCurrentPage?: (page: s
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
       <ThreeDBackground />
-      
+
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -468,7 +462,7 @@ function HeroSection() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
             Build the{" "}
             <AnimatedTextCycle
               words={["future", "impossible", "extraordinary", "intelligent"]}
@@ -477,20 +471,28 @@ function HeroSection() {
             />{" "}
             with AI
           </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Transform your business with cutting-edge AI solutions, smart websites, and automation systems that work while you sleep.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <GetStartedButton />
-            <Button variant="outline" size="lg" className="group">
-              View Our Work
+            <Button
+              variant="outline"
+              size="lg"
+              className="group"
+              onClick={() => {
+                const processElement = document.getElementById('process');
+                if (processElement) {
+                  processElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              See Our Process
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
-          
-                    
         </motion.div>
       </div>
     </section>
@@ -503,7 +505,7 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
       icon: <Globe className="w-8 h-8" />,
       title: "Smart Websites",
       description: "Beautiful, modern websites built with intelligence and style.",
-            features: ["Futuristic landing pages", "3D interactive designs", "Portfolios, SaaS, and eCommerce"],
+      features: ["Futuristic landing pages", "3D interactive designs", "Portfolios, SaaS, and eCommerce"],
       emoji: "🔮",
       color: "from-blue-500 to-cyan-500"
     },
@@ -511,7 +513,7 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
       icon: <Brain className="w-8 h-8" />,
       title: "AI Agents & Chatbots",
       description: "Custom GPT-powered bots that talk, think, and take action.",
-            features: ["Booking bots, support bots, and sales agents", "Trained on your business data", "Multi-platform deployment"],
+      features: ["Booking bots, support bots, and sales agents", "Trained on your business data", "Multi-platform deployment"],
       emoji: "🧠",
       color: "from-purple-500 to-pink-500"
     },
@@ -519,22 +521,22 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
       icon: <Cog className="w-8 h-8" />,
       title: "Automation Systems",
       description: "End-to-end workflows that connect your tools and run your business on autopilot.",
-            features: ["CRM + Notion + Google Sheets automation", "Auto-form processing, reminders", "Lead tracking & onboarding logic"],
+      features: ["CRM + Notion + Google Sheets automation", "Auto-form processing, reminders", "Lead tracking & onboarding logic"],
       emoji: "⚙️",
       color: "from-green-500 to-emerald-500"
     },
     {
       icon: <Puzzle className="w-8 h-8" />,
       title: "Custom AI Tools",
-            description: "Custom AI-powered tools built to solve real-world problems with intelligent design.",
-            features: ["Summarizers, generators, extractors", "Trained for specific workflows", "Hosted tools or embeddable widgets"],
+      description: "Custom AI-powered tools built to solve real-world problems with intelligent design.",
+      features: ["Summarizers, generators, extractors", "Trained for specific workflows", "Hosted tools or embeddable widgets"],
       emoji: "🧩",
       color: "from-orange-500 to-red-500"
     }
   ];
 
   return (
-    <section id="services" className="relative w-full min-h-screen py-20 bg-background">
+    <section id="services" className="relative w-full py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -543,15 +545,15 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
             Our Services
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Comprehensive AI solutions designed to transform your business operations and accelerate growth.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -560,20 +562,20 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <Card className="flex flex-col grow bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10">
+              <Card className="h-full flex flex-col bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 group hover:shadow-lg hover:shadow-primary/10">
                 <CardHeader>
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center text-white shadow-lg`}>
+                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center text-white shadow-lg flex-shrink-0`}>
                       {service.icon}
                     </div>
-                    <div>
-                      <div className="text-2xl mb-2">{service.emoji}</div>
-                      <h3 className="text-2xl font-bold text-foreground">{service.title}</h3>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-2xl leading-none">{service.emoji}</div>
+                      <h3 className="text-xl lg:text-2xl font-bold text-foreground leading-tight pt-1">{service.title}</h3>
                     </div>
                   </div>
                   <p className="text-muted-foreground text-lg">{service.description}</p>
                 </CardHeader>
-                <CardContent className="flex flex-col flex-grow space-y-6">
+                <CardContent className="flex flex-col flex-grow">
                   <ul className="space-y-3">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start space-x-3">
@@ -582,15 +584,20 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto">
-                    <Button 
-                      className="w-full group" 
+                  <div className="mt-auto pt-6">
+                    <Button
+                      className="w-full group"
                       variant="outline"
                       onClick={() => {
                         if (service.title === "Smart Websites" && setCurrentPage) {
                           setCurrentPage('smart-websites');
                         } else if (service.title === "AI Agents & Chatbots" && setCurrentPage) {
                           setCurrentPage('ai-agents');
+                        } else {
+                          const contactElement = document.getElementById('contact');
+                          if (contactElement) {
+                            contactElement.scrollIntoView({ behavior: 'smooth' });
+                          }
                         }
                       }}
                     >
@@ -607,7 +614,6 @@ function ServicesSection({ setCurrentPage }: { setCurrentPage?: (page: string) =
     </section>
   );
 }
-
 
 
 function WhatYouGetSection() {
@@ -647,13 +653,13 @@ function WhatYouGetSection() {
   ];
 
   return (
-    <section id="process" className="relative w-full py-32 bg-gradient-to-b from-background via-muted/20 to-background overflow-hidden">
+    <section id="process" className="relative w-full py-20 md:py-32 bg-gradient-to-b from-background via-muted/20 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-green-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
         <div className="absolute bottom-40 right-1/3 w-56 h-56 bg-orange-500/5 rounded-full blur-3xl animate-pulse delay-3000"></div>
-        
+
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
       </div>
 
@@ -663,25 +669,25 @@ function WhatYouGetSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16 md:mb-20"
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <Sparkles className="w-4 h-4 text-primary mr-2" />
             <span className="text-sm font-medium text-primary">Our Process</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text">
             What You Get
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            A proven methodology that transforms your vision into reality with precision engineering, 
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            A proven methodology that transforms your vision into reality with precision engineering,
             cutting-edge technology, and continuous innovation at every step.
           </p>
         </motion.div>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent transform -translate-y-1/2"></div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-6">
+          <div className="hidden xl:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent transform -translate-y-1/2"></div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
             {deliverables.map((item, index) => (
               <motion.div
                 key={index}
@@ -691,17 +697,13 @@ function WhatYouGetSection() {
                 viewport={{ once: true }}
                 className="group"
               >
-                {index < deliverables.length - 1 && (
-                  <div className="lg:hidden absolute left-1/2 bottom-0 w-px h-8 bg-gradient-to-b from-border to-transparent transform -translate-x-1/2 translate-y-full"></div>
-                )}
-                
                 <Card className="relative h-full bg-card/80 backdrop-blur-xl border-border/50 hover:border-primary/30 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-primary/10 overflow-hidden">
                   <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-all duration-700`}></div>
-                  
+
                   <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center">
                     <span className="text-xs font-bold text-muted-foreground">{item.step}</span>
                   </div>
-                  
+
                   <CardHeader className="relative z-10 pb-4">
                     <div className="flex flex-col items-center text-center space-y-6">
                       <div className="relative">
@@ -710,26 +712,26 @@ function WhatYouGetSection() {
                         </div>
                         <div className={`absolute inset-0 w-20 h-20 rounded-2xl bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`}></div>
                       </div>
-                      
+
                       <div className="space-y-3">
-                        <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                        <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                           {item.title}
                         </h3>
-                        <p className="text-muted-foreground font-medium leading-relaxed">
+                        <p className="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed">
                           {item.description}
                         </p>
                       </div>
                     </div>
                   </CardHeader>
-                  
-                  <CardContent className="relative z-10 pt-0 pb-8">
+
+                  <CardContent className="relative z-10 pt-0 pb-8 px-6">
                     <p className="text-muted-foreground/90 text-sm text-center leading-relaxed mb-6">
                       {item.details}
                     </p>
-                    
+
                     <div className="flex justify-center">
                       <div className="relative w-16 h-1 bg-muted rounded-full overflow-hidden">
-                        <motion.div 
+                        <motion.div
                           className={`absolute inset-y-0 left-0 bg-gradient-to-r ${item.color} rounded-full`}
                           initial={{ width: 0 }}
                           whileInView={{ width: "100%" }}
@@ -739,7 +741,7 @@ function WhatYouGetSection() {
                       </div>
                     </div>
                   </CardContent>
-                  
+
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </Card>
               </motion.div>
@@ -766,7 +768,7 @@ function WhatYouGetSection() {
             </div>
           </div>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -774,8 +776,8 @@ function WhatYouGetSection() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-                    <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => {
               const contactElement = document.getElementById('contact');
@@ -832,20 +834,20 @@ function FAQSection() {
   };
 
   return (
-    <section id="faq" className="relative w-full py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
+    <section id="faq" className="relative w-full py-20 md:py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-60 right-20 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-32 left-1/3 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
         <div className="absolute bottom-60 right-1/4 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse delay-3000"></div>
-        
+
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
-        
+
         <div className="absolute top-1/4 left-1/5 w-3 h-3 bg-primary/15 rounded-full animate-bounce delay-500"></div>
         <div className="absolute top-3/4 right-1/5 w-2 h-2 bg-purple-500/20 rounded-full animate-bounce delay-1000"></div>
         <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 bg-cyan-500/15 rounded-full animate-bounce delay-1500"></div>
         <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-green-500/20 rounded-full animate-bounce delay-2000"></div>
-        
+
         <div className="absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent"></div>
         <div className="absolute bottom-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/10 to-transparent"></div>
       </div>
@@ -856,21 +858,21 @@ function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center mb-16 md:mb-24"
         >
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-cyan-500/10 border border-primary/20 mb-8 backdrop-blur-sm">
             <MessageSquare className="w-5 h-5 text-primary mr-3" />
             <span className="text-sm font-semibold text-primary tracking-wide uppercase">Frequently Asked Questions</span>
             <div className="ml-3 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
           </div>
-          <h2 className="text-5xl md:text-7xl font-bold text-foreground mb-8 leading-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 leading-tight">
             Got Questions?
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
               We've Got Answers
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Everything you need to know about our AI solutions, development process, and how we can transform your business with intelligent automation.
           </p>
         </motion.div>
@@ -888,49 +890,52 @@ function FAQSection() {
               >
                 <Card className="relative bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/40 transition-all duration-700 overflow-hidden hover:shadow-2xl hover:shadow-primary/5">
                   <div className={`absolute inset-0 bg-gradient-to-br ${faq.color} opacity-0 group-hover:opacity-5 transition-all duration-700`}></div>
-                  
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-muted/50 backdrop-blur-sm">
-                    <span className="text-xs font-medium text-muted-foreground">{faq.category}</span>
-                  </div>
-                  
-                  <button
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full text-left p-8 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded-lg transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between">
+
+                  <div className="w-full text-left p-6 md:p-8">
+                    <div className="flex items-center justify-between">
                       <div className="flex items-start space-x-4 flex-1 pr-4">
                         <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${faq.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex-shrink-0 mt-1`}>
                           {faq.icon}
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
                             {faq.question}
                           </h3>
                           <div className="mt-2 w-16 h-1 bg-gradient-to-r from-primary/50 to-transparent rounded-full group-hover:w-24 transition-all duration-500"></div>
                         </div>
                       </div>
-                      <div className="flex-shrink-0 ml-4">
-                        <motion.div
-                          animate={{ rotate: openIndex === index ? 180 : 0 }}
-                          transition={{ duration: 0.4, ease: "easeInOut" }}
+                      <div className="flex flex-col items-center space-y-2 ml-4">
+                        <div className="px-3 py-1 rounded-full bg-muted/50 backdrop-blur-sm">
+                          <span className="text-xs font-medium text-muted-foreground">{faq.category}</span>
+                        </div>
+                        <button
+                          onClick={() => toggleFAQ(index)}
                           className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110"
+                          aria-expanded={openIndex === index}
+                          aria-controls={`faq-answer-${index}`}
                         >
-                          <ChevronDown className="w-5 h-5 text-primary" />
-                        </motion.div>
+                          <motion.div
+                            animate={{ rotate: openIndex === index ? 180 : 0 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                          >
+                            <ChevronDown className="w-5 h-5 text-primary" />
+                          </motion.div>
+                        </button>
                       </div>
                     </div>
-                  </button>
-                  
+                  </div>
+
                   <AnimatePresence>
                     {openIndex === index && (
                       <motion.div
+                        id={`faq-answer-${index}`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="px-8 pb-8">
+                        <div className="px-6 md:px-8 pb-8">
                           <div className="ml-16">
                             <div className="w-full h-px bg-gradient-to-r from-border via-primary/30 to-transparent mb-6"></div>
                             <motion.div
@@ -940,7 +945,7 @@ function FAQSection() {
                               transition={{ duration: 0.4, delay: 0.1 }}
                               className="space-y-4"
                             >
-                              <p className="text-muted-foreground leading-relaxed text-lg">
+                              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
                                 {faq.answer}
                               </p>
                               <div className="flex items-center space-x-3 pt-2">
@@ -953,7 +958,7 @@ function FAQSection() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                  
+
                   <div className={`absolute inset-0 rounded-lg bg-gradient-to-r ${faq.color} opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none blur-xl`}></div>
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </Card>
@@ -983,7 +988,7 @@ function FAQSection() {
                   Our AI experts are here to help you find the perfect solution for your business needs.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                    <Button 
+                  <Button
                     className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
                     onClick={() => window.open('https://t.me/M_X_Mirsaidov', '_blank')}
                   >
@@ -1005,23 +1010,50 @@ function FAQSection() {
 }
 
 function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    service: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      service: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+  };
+
   return (
-    <section id="contact" className="relative w-full py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
+    <section id="contact" className="relative w-full py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-80 h-80 bg-blue-500/3 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-96 h-96 bg-purple-500/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-cyan-500/3 rounded-full blur-3xl animate-pulse delay-2000"></div>
         <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-green-500/3 rounded-full blur-3xl animate-pulse delay-3000"></div>
-        
+
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
-        
+
         <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-primary/10 rounded-full animate-bounce delay-500"></div>
         <div className="absolute top-3/4 right-1/6 w-1.5 h-1.5 bg-purple-500/15 rounded-full animate-bounce delay-1000"></div>
         <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 bg-cyan-500/10 rounded-full animate-bounce delay-1500"></div>
-        
+
         <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
         <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/5 to-transparent"></div>
-        
+
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background/80 to-transparent"></div>
       </div>
 
@@ -1031,20 +1063,20 @@ function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16 md:mb-20"
         >
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 via-purple-500/10 to-cyan-500/10 border border-primary/20 mb-8 backdrop-blur-sm">
             <Send className="w-5 h-5 text-primary mr-3" />
             <span className="text-sm font-semibold text-primary tracking-wide uppercase">Get In Touch</span>
             <div className="ml-3 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
             Let's build something{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
               smart
             </span>{" "}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Tell us what you need, and we'll get back to you.
           </p>
         </motion.div>
@@ -1057,7 +1089,88 @@ function ContactSection() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <ContactForm />
+              <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10 p-8">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                          Name
+                        </label>
+                        <Input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                          placeholder="Your name"
+                        />
+                      </div>
+
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                          Email
+                        </label>
+                        <Input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                          placeholder="your@email.com"
+                        />
+                      </div>
+
+                      <div>
+                        <label htmlFor="service" className="block text-sm font-medium text-foreground mb-2">
+                          What are you looking for?
+                        </label>
+                        <Select onValueChange={handleSelectChange} value={formData.service}>
+                          <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
+                            <SelectValue placeholder="Select a service" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-background border-border">
+                            <SelectItem value="ai-automation">AI Automation</SelectItem>
+                            <SelectItem value="website">Website</SelectItem>
+                            <SelectItem value="both">Both</SelectItem>
+                            <SelectItem value="something-else">Something Else</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                          Message
+                        </label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          required
+                          rows={5}
+                          className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
+                          placeholder="Tell us about your project..."
+                        />
+                      </div>
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
+                      size="lg"
+                    >
+                      Send Message
+                      <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </form>
+                </div>
+              </Card>
             </motion.div>
 
             <motion.div
@@ -1069,9 +1182,9 @@ function ContactSection() {
             >
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-foreground mb-8">Get in touch directly</h3>
-                
+
                 <div className="space-y-6">
-                                    <motion.div
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="flex items-center space-x-4 p-4 rounded-lg bg-card/40 backdrop-blur-sm border border-border/30 hover:border-primary/30 transition-all duration-300"
                   >
@@ -1080,16 +1193,16 @@ function ContactSection() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Phone</p>
-                      <a 
-                        href="tel:+998901326467" 
+                      <a
+                        href="tel:+998901326467"
                         className="text-foreground font-medium hover:text-primary transition-colors duration-300"
                       >
                         +998901326467
                       </a>
                     </div>
                   </motion.div>
-                  
-                                    <motion.div
+
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="flex items-center space-x-4 p-4 rounded-lg bg-card/40 backdrop-blur-sm border border-border/30 hover:border-primary/30 transition-all duration-300"
                   >
@@ -1098,16 +1211,16 @@ function ContactSection() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                                                                  <a 
-                        href="mailto:xmirsaidov5@gmail.com?subject=Project%20Inquiry&body=Hello,%20I'm%20interested%20in%20your%20AI%20services..." 
+                      <a
+                        href="mailto:xmirsaidov5@gmail.com?subject=Project%20Inquiry&body=Hello,%20I'm%20interested%20in%20your%20AI%20services..."
                         className="text-foreground font-medium hover:text-primary transition-colors duration-300"
                       >
                         xmirsaidov5@gmail.com
                       </a>
                     </div>
                   </motion.div>
-                  
-                                    <motion.div
+
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="flex items-center space-x-4 p-4 rounded-lg bg-card/40 backdrop-blur-sm border border-border/30 hover:border-primary/30 transition-all duration-300"
                   >
@@ -1116,10 +1229,10 @@ function ContactSection() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Telegram</p>
-                      <a 
-                        href="https://t.me/M_X_Mirsaidov" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href="https://t.me/M_X_Mirsaidov"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-foreground font-medium hover:text-primary transition-colors duration-300"
                       >
                         @M_X_Mirsaidov
@@ -1143,7 +1256,7 @@ function ContactSection() {
                       <span className="text-sm font-medium text-primary">Available for new projects</span>
                     </div>
                     <p className="text-muted-foreground text-sm leading-relaxed">
-                      We typically respond within 24 hours. For urgent inquiries, 
+                      We typically respond within 24 hours. For urgent inquiries,
                       reach out via Telegram for the fastest response.
                     </p>
                   </div>
@@ -1200,7 +1313,7 @@ function AIAgentsHero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <ThreeDBackground />
-      
+
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -1214,16 +1327,16 @@ function AIAgentsHero() {
             <div className="ml-3 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400">
               AI Agents & Chatbots
             </span>
           </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
             Custom GPT-powered bots that talk, think, and take action.
           </p>
-          
+
           <div className="mb-12 max-w-2xl mx-auto">
             <ul className="space-y-4 text-lg text-muted-foreground">
               <li className="flex items-center justify-center space-x-3">
@@ -1240,10 +1353,10 @@ function AIAgentsHero() {
               </li>
             </ul>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-4"
               onClick={() => {
                 const contactElement = document.getElementById('ai-agents-contact');
@@ -1269,7 +1382,7 @@ function AIAgentsHero() {
 // Why This Matters Section
 function WhyThisMatters() {
   return (
-    <section id="why-this-matters" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
+    <section id="why-this-matters" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -1283,10 +1396,10 @@ function WhyThisMatters() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Smarter Conversations. <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Real Results.</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             We build bots that actually understand your business — answering questions, qualifying leads, and automating workflows with precision. No canned responses. Just intelligent automation tailored to your brand.
           </p>
         </motion.div>
@@ -1326,7 +1439,7 @@ function AIAgentsIncluded() {
   ];
 
   return (
-    <section id="whats-included" className="relative py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
+    <section id="whats-included" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -1335,15 +1448,15 @@ function AIAgentsIncluded() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             What's <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Included</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Everything you need for intelligent automation that understands your business and converts visitors into customers.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -1355,7 +1468,7 @@ function AIAgentsIncluded() {
             >
               <Card className="relative h-full bg-card/30 backdrop-blur-sm border-border/20 hover:border-primary/30 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-primary/10 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 <CardContent className="relative z-10 p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/10 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
@@ -1409,12 +1522,12 @@ function AIAgentsPerfectFor() {
       title: "Marketplaces",
       description: "Help customers navigate and convert faster.",
       color: "from-blue-500 to-purple-500",
-      emoji: "🛍️"
+      emoji: "?️"
     }
   ];
 
   return (
-    <section id="perfect-for" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
+    <section id="perfect-for" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-40 left-20 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-40 right-20 w-80 h-80 bg-pink-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -1429,15 +1542,15 @@ function AIAgentsPerfectFor() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Perfect <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">For</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             AI agents designed for businesses that want to automate intelligently and scale efficiently.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {clientTypes.map((client, index) => (
             <motion.div
               key={index}
@@ -1449,7 +1562,7 @@ function AIAgentsPerfectFor() {
             >
               <Card className="relative h-full bg-card/40 backdrop-blur-xl border-border/30 hover:border-primary/40 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-primary/10 overflow-hidden">
                 <div className={`absolute inset-0 bg-gradient-to-br ${client.color} opacity-0 group-hover:opacity-10 transition-all duration-700`}></div>
-                
+
                 <CardContent className="relative z-10 p-6 text-center">
                   <div className="flex flex-col items-center space-y-4 mb-4">
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${client.color} flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
@@ -1464,7 +1577,7 @@ function AIAgentsPerfectFor() {
                     {client.description}
                   </p>
                 </CardContent>
-                
+
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </Card>
             </motion.div>
@@ -1477,23 +1590,58 @@ function AIAgentsPerfectFor() {
 
 // AI Agents Contact Section
 function AIAgentsContact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    need: '',
+    message: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      need: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('AI Agents Contact Form submitted:', formData);
+    // Add actual form submission logic here (e.g., API call)
+    alert('Thank you for your inquiry! We will get back to you within 12 hours.');
+    setFormData({
+      name: '',
+      email: '',
+      need: '',
+      message: ''
+    });
+  };
+
   return (
-    <section id="ai-agents-contact" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
+    <section id="ai-agents-contact" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-80 h-80 bg-purple-500/3 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-96 h-96 bg-pink-500/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-500/3 rounded-full blur-3xl animate-pulse delay-2000"></div>
         <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-pink-500/3 rounded-full blur-3xl animate-pulse delay-3000"></div>
-        
+
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
-        
+
         <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-purple-400/10 rounded-full animate-bounce delay-500"></div>
         <div className="absolute top-3/4 right-1/6 w-1.5 h-1.5 bg-pink-500/15 rounded-full animate-bounce delay-1000"></div>
         <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 bg-purple-500/10 rounded-full animate-bounce delay-1500"></div>
-        
+
         <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/5 to-transparent"></div>
         <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/5 to-transparent"></div>
-        
+
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background/80 to-transparent"></div>
       </div>
 
@@ -1510,10 +1658,10 @@ function AIAgentsContact() {
             <span className="text-sm font-semibold text-purple-400 tracking-wide uppercase">Start Your AI Project</span>
             <div className="ml-3 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
             Start Your AI Project
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Tell us about your goals and we'll get in touch within 12h.
           </p>
         </motion.div>
@@ -1525,7 +1673,101 @@ function AIAgentsContact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <ContactForm variant="ai-agents" />
+            <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                        Name
+                      </label>
+                      <Input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="Your name"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                        Email
+                      </label>
+                      <Input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="need" className="block text-sm font-medium text-foreground mb-2">
+                        What do you need?
+                      </label>
+                      <Select onValueChange={handleSelectChange} value={formData.need}>
+                        <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
+                          <SelectValue placeholder="Select what you need" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background border-border">
+                          <SelectItem value="ai-agent-only">AI Agent only</SelectItem>
+                          <SelectItem value="website-only">Website only</SelectItem>
+                          <SelectItem value="both">Both</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                        Message
+                      </label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
+                        placeholder="Tell us about your goals..."
+                      />
+                    </div>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
+                    size="lg"
+                  >
+                    Send Request
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </form>
+                <div className="text-center mt-6">
+                  <p className="text-muted-foreground text-sm mb-3">
+                    For fastest response, reach out via Telegram:
+                  </p>
+                  <a
+                    href="https://t.me/M_X_Mirsaidov"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 text-primary font-medium hover:underline"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>@M_X_Mirsaidov</span>
+                  </a>
+                </div>
+              </div>
+            </Card>
           </motion.div>
         </div>
       </div>
@@ -1536,9 +1778,9 @@ function AIAgentsContact() {
 // Smart Websites Hero Section
 function SmartWebsitesHero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <ThreeDBackground />
-      
+
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -1552,19 +1794,19 @@ function SmartWebsitesHero() {
             <div className="ml-3 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
               Smart Websites
             </span>
           </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
             Beautiful, modern websites built with intelligence and style. We create digital experiences that don't just look amazing—they work smarter.
           </p>
-          
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-            <Button 
-              size="lg" 
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+            <Button
+              size="lg"
               className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-4"
               onClick={() => {
                 const contactElement = document.getElementById('smart-websites-contact');
@@ -1573,18 +1815,14 @@ function SmartWebsitesHero() {
                 }
               }}
             >
-                            Start Your Project
+              Start Your Project
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-                                    <Button variant="outline" size="lg" className="group border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 px-8 py-4">
+            <Button variant="outline" size="lg" className="group border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 px-8 py-4">
               View Projects
               <Eye className="ml-2 h-5 w-5 transition-transform group-hover:scale-110" />
             </Button>
           </div>
-
-          
-
-                    
         </motion.div>
       </div>
     </section>
@@ -1618,7 +1856,7 @@ function WhySmartWebsites() {
   ];
 
   return (
-    <section id="why-smart-websites" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
+    <section id="why-smart-websites" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -1632,10 +1870,10 @@ function WhySmartWebsites() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Smart</span> Websites?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             We don't just build websites—we engineer digital experiences that work intelligently for your business.
           </p>
         </motion.div>
@@ -1652,7 +1890,7 @@ function WhySmartWebsites() {
             >
               <Card className={`relative h-full bg-card/40 backdrop-blur-xl border-border/30 hover:border-primary/40 transition-all duration-700 group-hover:shadow-2xl group-hover:${benefit.glow} overflow-hidden`}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-0 group-hover:opacity-10 transition-all duration-700`}></div>
-                
+
                 <CardContent className="relative z-10 p-8 text-center">
                   <div className="relative mb-6">
                     <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${benefit.color} flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 mx-auto`}>
@@ -1660,7 +1898,7 @@ function WhySmartWebsites() {
                     </div>
                     <div className={`absolute inset-0 w-20 h-20 rounded-2xl bg-gradient-to-r ${benefit.color} opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500 mx-auto`}></div>
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                     {benefit.title}
                   </h3>
@@ -1713,7 +1951,7 @@ function WhatsIncluded() {
   ];
 
   return (
-    <section id="whats-included" className="relative py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
+    <section id="whats-included" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -1722,15 +1960,15 @@ function WhatsIncluded() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             What's <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Included</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Everything you need for a professional, high-converting website that works intelligently.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -1742,7 +1980,7 @@ function WhatsIncluded() {
             >
               <Card className="relative h-full bg-card/30 backdrop-blur-sm border-border/20 hover:border-primary/30 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-primary/10 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 <CardContent className="relative z-10 p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
@@ -1801,7 +2039,7 @@ function PerfectFor() {
   ];
 
   return (
-    <section id="perfect-for" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
+    <section id="perfect-for" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-40 left-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-40 right-20 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -1816,10 +2054,10 @@ function PerfectFor() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Perfect <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">For</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Smart websites designed for businesses that want to grow intelligently and efficiently.
           </p>
         </motion.div>
@@ -1836,15 +2074,15 @@ function PerfectFor() {
             >
               <Card className="relative h-full bg-card/40 backdrop-blur-xl border-border/30 hover:border-primary/40 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-primary/10 overflow-hidden">
                 <div className={`absolute inset-0 bg-gradient-to-br ${client.color} opacity-0 group-hover:opacity-10 transition-all duration-700`}></div>
-                
+
                 <CardContent className="relative z-10 p-8">
                   <div className="flex items-center space-x-4 mb-6">
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${client.color} flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${client.color} flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex-shrink-0`}>
                       {client.icon}
                     </div>
                     <div>
-                      <div className="text-3xl mb-2">{client.emoji}</div>
-                      <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                       <div className="text-3xl leading-none">{client.emoji}</div>
+                       <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight pt-1">
                         {client.title}
                       </h3>
                     </div>
@@ -1853,7 +2091,7 @@ function PerfectFor() {
                     {client.description}
                   </p>
                 </CardContent>
-                
+
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </Card>
             </motion.div>
@@ -1867,7 +2105,7 @@ function PerfectFor() {
 // Smart Websites CTA Section
 function SmartWebsitesCTA() {
   return (
-    <section className="relative py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
+    <section className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -1882,32 +2120,32 @@ function SmartWebsitesCTA() {
           viewport={{ once: true }}
           className="text-center max-w-4xl mx-auto"
         >
-          <Card className="relative bg-gradient-to-r from-card/60 via-card/40 to-card/60 backdrop-blur-xl border-border/40 p-12 hover:border-primary/40 transition-all duration-500 group overflow-hidden">
+          <Card className="relative bg-gradient-to-r from-card/60 via-card/40 to-card/60 backdrop-blur-xl border-border/40 p-8 sm:p-12 hover:border-primary/40 transition-all duration-500 group overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
+
             <div className="relative z-10">
               <div className="flex items-center justify-center space-x-4 mb-8">
                 <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
                 <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse delay-300"></div>
                 <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse delay-700"></div>
               </div>
-              
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
                 We don't just build websites —{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
                   we build smart systems
                 </span>{" "}
                 that work for you.
               </h2>
-              
-              <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-                Ready to transform your online presence with intelligent design and automation? 
+
+              <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+                Ready to transform your online presence with intelligent design and automation?
                 Let's create something extraordinary together.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-10 py-4"
                   onClick={() => {
                     const contactElement = document.getElementById('smart-websites-contact');
@@ -1933,23 +2171,58 @@ function SmartWebsitesCTA() {
 }
 
 function SmartWebsitesContact() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    emailAddress: '',
+    projectType: '',
+    projectDescription: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      projectType: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Smart Websites Contact Form submitted:', formData);
+    // Add actual form submission logic here (e.g., API call)
+    alert('Thank you for your inquiry! We will get back to you within 24 hours.');
+    setFormData({
+      fullName: '',
+      emailAddress: '',
+      projectType: '',
+      projectDescription: ''
+    });
+  };
+
   return (
-    <section id="smart-websites-contact" className="relative py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
+    <section id="smart-websites-contact" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-80 h-80 bg-blue-500/3 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-96 h-96 bg-purple-500/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-cyan-500/3 rounded-full blur-3xl animate-pulse delay-2000"></div>
         <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-green-500/3 rounded-full blur-3xl animate-pulse delay-3000"></div>
-        
+
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
-        
+
         <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-primary/10 rounded-full animate-bounce delay-500"></div>
         <div className="absolute top-3/4 right-1/6 w-1.5 h-1.5 bg-purple-500/15 rounded-full animate-bounce delay-1000"></div>
         <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 bg-cyan-500/10 rounded-full animate-bounce delay-1500"></div>
-        
+
         <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
         <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/5 to-transparent"></div>
-        
+
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background/80 to-transparent"></div>
       </div>
 
@@ -1966,7 +2239,7 @@ function SmartWebsitesContact() {
             <span className="text-sm font-semibold text-blue-400 tracking-wide uppercase">Start Your Project</span>
             <div className="ml-3 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
             Tell us what you need, and we'll get back{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
               within 24 hours.
@@ -1981,7 +2254,100 @@ function SmartWebsitesContact() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <ContactForm variant="smart-websites" />
+            <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-2">
+                        Full Name
+                      </label>
+                      <Input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="Your full name"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="emailAddress" className="block text-sm font-medium text-foreground mb-2">
+                        Email Address
+                      </label>
+                      <Input
+                        type="email"
+                        id="emailAddress"
+                        name="emailAddress"
+                        value={formData.emailAddress}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="projectType" className="block text-sm font-medium text-foreground mb-2">
+                        Project Type
+                      </label>
+                      <Select onValueChange={handleSelectChange} value={formData.projectType}>
+                        <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
+                          <SelectValue placeholder="Select project type" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background border-border">
+                          <SelectItem value="website-only">Website only</SelectItem>
+                          <SelectItem value="website-ai-agent">Website + AI Agent</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="projectDescription" className="block text-sm font-medium text-foreground mb-2">
+                        Short Project Description
+                      </label>
+                      <Textarea
+                        id="projectDescription"
+                        name="projectDescription"
+                        value={formData.projectDescription}
+                        onChange={handleInputChange}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
+                        placeholder="Describe your project briefly..."
+                      />
+                    </div>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
+                    size="lg"
+                  >
+                    Send Message
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </form>
+                <div className="text-center mt-6">
+                  <p className="text-muted-foreground text-sm">
+                    For fastest response, reach out via Telegram:{" "}
+                    <a
+                      href="https://t.me/M_X_Mirsaidov"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary font-medium hover:underline"
+                    >
+                      @M_X_Mirsaidov
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </Card>
           </motion.div>
         </div>
       </div>
@@ -2002,8 +2368,8 @@ export default function XonaiWebsite() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground dark"> {/* Added 'dark' class */}
-            <Navigation setCurrentPage={setCurrentPage} currentPage="home" />
+    <div className="min-h-screen bg-background text-foreground dark">
+      <Navigation setCurrentPage={setCurrentPage} currentPage="home" />
       <HeroSection />
       <ServicesSection setCurrentPage={setCurrentPage} />
       <WhatYouGetSection />
