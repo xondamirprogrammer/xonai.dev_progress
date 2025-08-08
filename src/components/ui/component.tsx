@@ -1754,7 +1754,7 @@ function AIAgentsContact() {
                     className="w-full group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
                     size="lg"
                   >
-                    Send Request
+                    Send Message
                     <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </form>
