@@ -1368,8 +1368,14 @@ function AIAgentsHero() {
               Start Your Project
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="group border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/5 px-8 py-4">
-              View Projects
+            <Button variant="outline" size="lg" className="group border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/5 px-8 py-4"
+             onClick={() => {
+                const includedElement = document.getElementById('whats-included');
+                if (includedElement) {
+                  includedElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}>
+              What's Included
               <Eye className="ml-2 h-5 w-5 transition-transform group-hover:scale-110" />
             </Button>
           </div>
@@ -1818,8 +1824,14 @@ function SmartWebsitesHero() {
               Start Your Project
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="group border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 px-8 py-4">
-              View Projects
+            <Button variant="outline" size="lg" className="group border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 px-8 py-4"
+             onClick={() => {
+                const includedElement = document.getElementById('whats-included');
+                if (includedElement) {
+                  includedElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}>
+              What's Included
               <Eye className="ml-2 h-5 w-5 transition-transform group-hover:scale-110" />
             </Button>
           </div>
