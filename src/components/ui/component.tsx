@@ -1637,4 +1637,758 @@ function AIAgentsContact() {
         <div className="absolute top-20 left-10 w-80 h-80 bg-purple-500/3 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-96 h-96 bg-pink-500/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-500/3 rounded-full blur-3xl animate-pulse delay-2000"></div>
-        <div className="absolute bottom-40
+        <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-pink-500/3 rounded-full blur-3xl animate-pulse delay-3000"></div>
+
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+
+        <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-purple-400/10 rounded-full animate-bounce delay-500"></div>
+        <div className="absolute top-3/4 right-1/6 w-1.5 h-1.5 bg-pink-500/15 rounded-full animate-bounce delay-1000"></div>
+        <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 bg-purple-500/10 rounded-full animate-bounce delay-1500"></div>
+
+        <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/5 to-transparent"></div>
+        <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500/5 to-transparent"></div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background/80 to-transparent"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 border border-purple-500/20 mb-8 backdrop-blur-sm">
+            <Send className="w-5 h-5 text-purple-400 mr-3" />
+            <span className="text-sm font-semibold text-purple-400 tracking-wide uppercase">Start Your AI Project</span>
+            <div className="ml-3 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+            Start Your AI Project
+          </h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Tell us about your goals and we'll get in touch within 12h.
+          </p>
+        </motion.div>
+
+        <div className="max-w-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                        Name
+                      </label>
+                      <Input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="Your name"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                        Email
+                      </label>
+                      <Input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="need" className="block text-sm font-medium text-foreground mb-2">
+                        What do you need?
+                      </label>
+                      <Select onValueChange={handleSelectChange} value={formData.need}>
+                        <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
+                          <SelectValue placeholder="Select what you need" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background border-border">
+                          <SelectItem value="ai-agent-only">AI Agent only</SelectItem>
+                          <SelectItem value="website-only">Website only</SelectItem>
+                          <SelectItem value="both">Both</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                        Message
+                      </label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
+                        placeholder="Tell us about your goals..."
+                      />
+                    </div>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full group bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
+                    size="lg"
+                  >
+                    Send Request
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </form>
+                <div className="text-center mt-6">
+                  <p className="text-muted-foreground text-sm mb-3">
+                    For fastest response, reach out via Telegram:
+                  </p>
+                  <a
+                    href="https://t.me/M_X_Mirsaidov"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 text-primary font-medium hover:underline"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>@M_X_Mirsaidov</span>
+                  </a>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Smart Websites Hero Section
+function SmartWebsitesHero() {
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <ThreeDBackground />
+
+      <div className="relative z-10 container mx-auto px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border border-blue-500/20 mb-8 backdrop-blur-sm">
+            <Globe className="w-5 h-5 text-blue-400 mr-3" />
+            <span className="text-sm font-semibold text-blue-400 tracking-wide uppercase">Smart Websites</span>
+            <div className="ml-3 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
+              Smart Websites
+            </span>
+          </h1>
+
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+            Beautiful, modern websites built with intelligence and style. We create digital experiences that don't just look amazing—they work smarter.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+            <Button
+              size="lg"
+              className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-4"
+              onClick={() => {
+                const contactElement = document.getElementById('smart-websites-contact');
+                if (contactElement) {
+                  contactElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Start Your Project
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button variant="outline" size="lg" className="group border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 px-8 py-4"
+             onClick={() => {
+                const includedElement = document.getElementById('whats-included');
+                if (includedElement) {
+                  includedElement.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}>
+              What's Included
+              <Eye className="ml-2 h-5 w-5 transition-transform group-hover:scale-110" />
+            </Button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// Why Smart Websites Section
+function WhySmartWebsites() {
+  const benefits = [
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: "Ultra-fast Loading",
+      description: "Optimized for speed with cutting-edge performance techniques that keep visitors engaged.",
+      color: "from-yellow-500 to-orange-500",
+      glow: "shadow-yellow-500/20"
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8" />,
+      title: "Designed to Convert",
+      description: "Every element strategically placed to guide visitors toward your business goals.",
+      color: "from-green-500 to-emerald-500",
+      glow: "shadow-green-500/20"
+    },
+    {
+      icon: <Brain className="w-8 h-8" />,
+      title: "AI-Integrated Features",
+      description: "Smart chatbots, automations, and intelligent user experiences built right in.",
+      color: "from-purple-500 to-pink-500",
+      glow: "shadow-purple-500/20"
+    }
+  ];
+
+  return (
+    <section id="why-smart-websites" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Smart</span> Websites?
+          </h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            We don't just build websites—we engineer digital experiences that work intelligently for your business.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <Card className={`relative h-full bg-card/40 backdrop-blur-xl border-border/30 hover:border-primary/40 transition-all duration-700 group-hover:shadow-2xl group-hover:${benefit.glow} overflow-hidden`}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-0 group-hover:opacity-10 transition-all duration-700`}></div>
+
+                <CardContent className="relative z-10 p-8 text-center">
+                  <div className="relative mb-6">
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${benefit.color} flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 mx-auto`}>
+                      {benefit.icon}
+                    </div>
+                    <div className={`absolute inset-0 w-20 h-20 rounded-2xl bg-gradient-to-r ${benefit.color} opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500 mx-auto`}></div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// What's Included Section
+function WhatsIncluded() {
+  const features = [
+    {
+      icon: <Globe className="w-6 h-6" />,
+      title: "Mobile-First Responsive Design",
+      description: "Perfectly optimized for all devices, from smartphones to desktops."
+    },
+    {
+      icon: <Bot className="w-6 h-6" />,
+      title: "Booking/Contact Automations",
+      description: "Smart forms and booking systems that work 24/7 for your business."
+    },
+    {
+      icon: <TrendingUp className="w-6 h-6" />,
+      title: "Full SEO Setup",
+      description: "Built-in optimization to help your website rank higher in search results."
+    },
+    {
+      icon: <Layers className="w-6 h-6" />,
+      title: "Scalable & Maintainable Structure",
+      description: "Clean, organized code that grows with your business needs."
+    },
+    {
+      icon: <Sparkles className="w-6 h-6" />,
+      title: "Interactive 3D Elements",
+      description: "Engaging visual effects that captivate and convert visitors."
+    },
+    {
+      icon: <Settings className="w-6 h-6" />,
+      title: "Content Management System",
+      description: "Easy-to-use interface for updating your content without technical skills."
+    }
+  ];
+
+  return (
+    <section id="whats-included" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            What's <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Included</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Everything you need for a professional, high-converting website that works intelligently.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <Card className="relative h-full bg-card/30 backdrop-blur-sm border-border/20 hover:border-primary/30 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-primary/10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <CardContent className="relative z-10 p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary/20 to-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      {feature.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Perfect For Section
+function PerfectFor() {
+  const clientTypes = [
+    {
+      icon: <Plus className="w-8 h-8" />,
+      title: "Clinics",
+      description: "Patient booking systems, service showcases, and professional credibility.",
+      color: "from-blue-500 to-cyan-500",
+      emoji: "🏥"
+    },
+    {
+      icon: <Globe className="w-8 h-8" />,
+      title: "Online Stores",
+      description: "E-commerce platforms with smart inventory and customer management.",
+      color: "from-green-500 to-emerald-500",
+      emoji: "🛒"
+    },
+    {
+      icon: <Brain className="w-8 h-8" />,
+      title: "Coaches & Course Creators",
+      description: "Learning platforms, booking systems, and automated client onboarding.",
+      color: "from-purple-500 to-pink-500",
+      emoji: "🎓"
+    },
+    {
+      icon: <Rocket className="w-8 h-8" />,
+      title: "Small Businesses & Startups",
+      description: "Professional presence with growth-focused features and automation.",
+      color: "from-orange-500 to-red-500",
+      emoji: "🚀"
+    }
+  ];
+
+  return (
+    <section id="perfect-for" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-40 left-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-40 right-20 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/3 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Perfect <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">For</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Smart websites designed for businesses that want to grow intelligently and efficiently.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {clientTypes.map((client, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.15 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <Card className="relative h-full bg-card/40 backdrop-blur-xl border-border/30 hover:border-primary/40 transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-primary/10 overflow-hidden">
+                <div className={`absolute inset-0 bg-gradient-to-br ${client.color} opacity-0 group-hover:opacity-10 transition-all duration-700`}></div>
+
+                <CardContent className="relative z-10 p-8">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${client.color} flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex-shrink-0`}>
+                      {client.icon}
+                    </div>
+                    <div>
+                       <div className="text-3xl leading-none">{client.emoji}</div>
+                       <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight pt-1">
+                        {client.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
+                    {client.description}
+                  </p>
+                </CardContent>
+
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Smart Websites CTA Section
+function SmartWebsitesCTA() {
+  return (
+    <section className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center max-w-4xl mx-auto"
+        >
+          <Card className="relative bg-gradient-to-r from-card/60 via-card/40 to-card/60 backdrop-blur-xl border-border/40 p-8 sm:p-12 hover:border-primary/40 transition-all duration-500 group overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div className="relative z-10">
+              <div className="flex items-center justify-center space-x-4 mb-8">
+                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse delay-300"></div>
+                <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse delay-700"></div>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+                We don't just build websites —{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
+                  we build smart systems
+                </span>{" "}
+                that work for you.
+              </h2>
+
+              <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+                Ready to transform your online presence with intelligent design and automation?
+                Let's create something extraordinary together.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <Button
+                  size="lg"
+                  className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-10 py-4"
+                  onClick={() => {
+                    const contactElement = document.getElementById('smart-websites-contact');
+                    if (contactElement) {
+                      contactElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Get a Free Demo
+                  <Sparkles className="ml-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                </Button>
+                <Button variant="outline" size="lg" className="group border-primary/30 hover:border-primary/50 hover:bg-primary/5 px-10 py-4">
+                  View Case Studies
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function SmartWebsitesContact() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    emailAddress: '',
+    projectType: '',
+    projectDescription: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      projectType: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Smart Websites Contact Form submitted:', formData);
+    // Add actual form submission logic here (e.g., API call)
+    alert('Thank you for your inquiry! We will get back to you within 24 hours.');
+    setFormData({
+      fullName: '',
+      emailAddress: '',
+      projectType: '',
+      projectDescription: ''
+    });
+  };
+
+  return (
+    <section id="smart-websites-contact" className="relative py-20 md:py-32 bg-gradient-to-b from-background via-muted/10 to-background/50 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-80 h-80 bg-blue-500/3 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-purple-500/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-cyan-500/3 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-green-500/3 rounded-full blur-3xl animate-pulse delay-3000"></div>
+
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+
+        <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-primary/10 rounded-full animate-bounce delay-500"></div>
+        <div className="absolute top-3/4 right-1/6 w-1.5 h-1.5 bg-purple-500/15 rounded-full animate-bounce delay-1000"></div>
+        <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 bg-cyan-500/10 rounded-full animate-bounce delay-1500"></div>
+
+        <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/5 to-transparent"></div>
+        <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/5 to-transparent"></div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background/80 to-transparent"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border border-blue-500/20 mb-8 backdrop-blur-sm">
+            <Send className="w-5 h-5 text-blue-400 mr-3" />
+            <span className="text-sm font-semibold text-blue-400 tracking-wide uppercase">Start Your Project</span>
+            <div className="ml-3 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+            Tell us what you need, and we'll get back{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400">
+              within 24 hours.
+            </span>{" "}
+          </h2>
+        </motion.div>
+
+        <div className="max-w-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <Card className="bg-card/60 backdrop-blur-xl border-border/40 hover:border-primary/30 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-2">
+                        Full Name
+                      </label>
+                      <Input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="Your full name"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="emailAddress" className="block text-sm font-medium text-foreground mb-2">
+                        Email Address
+                      </label>
+                      <Input
+                        type="email"
+                        id="emailAddress"
+                        name="emailAddress"
+                        value={formData.emailAddress}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="projectType" className="block text-sm font-medium text-foreground mb-2">
+                        Project Type
+                      </label>
+                      <Select onValueChange={handleSelectChange} value={formData.projectType}>
+                        <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground">
+                          <SelectValue placeholder="Select project type" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background border-border">
+                          <SelectItem value="website-only">Website only</SelectItem>
+                          <SelectItem value="website-ai-agent">Website + AI Agent</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="projectDescription" className="block text-sm font-medium text-foreground mb-2">
+                        Short Project Description
+                      </label>
+                      <Textarea
+                        id="projectDescription"
+                        name="projectDescription"
+                        value={formData.projectDescription}
+                        onChange={handleInputChange}
+                        required
+                        rows={5}
+                        className="w-full px-4 py-3 rounded-lg bg-background/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-foreground placeholder-muted-foreground resize-none"
+                        placeholder="Describe your project briefly..."
+                      />
+                    </div>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
+                    size="lg"
+                  >
+                    Send Message
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </form>
+                <div className="text-center mt-6">
+                  <p className="text-muted-foreground text-sm">
+                    For fastest response, reach out via Telegram:{" "}
+                    <a
+                      href="https://t.me/M_X_Mirsaidov"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary font-medium hover:underline"
+                    >
+                      @M_X_Mirsaidov
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+export default function XonaiWebsite() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  if (currentPage === 'smart-websites') {
+    return <SmartWebsitesPage setCurrentPage={setCurrentPage} />;
+  }
+
+  if (currentPage === 'ai-agents') {
+    return <AIAgentsPage setCurrentPage={setCurrentPage} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground dark">
+      <Navigation setCurrentPage={setCurrentPage} currentPage="home" />
+      <HeroSection />
+      <ServicesSection setCurrentPage={setCurrentPage} />
+      <WhatYouGetSection />
+      <FAQSection />
+      <ContactSection />
+    </div>
+  );
+}
+
+export { AnimatedTextCycle, ThreeDBackground };
