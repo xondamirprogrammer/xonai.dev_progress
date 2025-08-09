@@ -74,12 +74,12 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
         throw error;
       }
 
-      console.log('Form submitted successfully:', data);
+      console.log('Form submitted successfully to', tableName, ':', data);
 
       // Success
       toast({
         title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
+        description: `Your message has been saved to ${tableName}. We'll get back to you within 24 hours.`,
       });
 
       // Reset form
@@ -94,7 +94,7 @@ export default function ContactForm({ variant = 'default' }: ContactFormProps) {
       console.error('Error submitting form:', error);
       toast({
         title: "Error sending message",
-        description: "Please try again or contact us directly.",
+        description: `Failed to save to database. Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: "destructive"
       });
     } finally {
